@@ -11,11 +11,9 @@ export default class Ajustes extends Phaser.Scene{
     }
 
     preload(){
-        this.load.image('vermelho', './Imagens/corpoVermelho.png');
-        this.load.image('verde', './Imagens/corpoVerde.png');
-        this.load.image('tabelaVelocidade', './Imagens/tabelaVelocidade.png');
-        this.load.image('tabelaMassa', './Imagens/tabelaMassa.png');
-        this.load.image('botaoInicio', './Imagens/botaoInicio.png');
+        this.load.image('vermelho', './Imagens/vermelho.png');
+        this.load.image('verde', './Imagens/verde.png');
+        this.load.image('azul', './Imagens/azul.png');
     }
 
     create(){
@@ -33,7 +31,7 @@ export default class Ajustes extends Phaser.Scene{
         this.corpo2.setdata = { posicao: [], velocidade: [], massa: 0};
 
         if(this.quantidadePlanetas === 3){
-            this.corpo3 = this.add.image(550, 400, 'verde');
+            this.corpo3 = this.add.image(550, 400, 'azul');
             this.corpo3.setInteractive();
             this.input.setDraggable(this.corpo3);
             this.corpo3.setdata = { posicao: [], velocidade: [] };
@@ -52,9 +50,14 @@ export default class Ajustes extends Phaser.Scene{
         this.input.on('dragend', (pointer, gameObject)=> {
             //if(gameObject === this.medidorMassa1)console.log('oi')
             gameObject.setdata.posicao = [gameObject.x , gameObject.y];
+            console.log("1 massa: ",this.corpo1.setdata.massa);
+            console.log("1 posicao: ",this.corpo1.setdata.posicao);
+            console.log("1 velocidade: ",this.corpo1.setdata.velocidade);
+
             this.defineAtributos(gameObject);
         });        
         
+        document.getElementById('botaoReiniciar').style.display = 'none';
     }
 
     defineAtributos(){
@@ -65,7 +68,7 @@ export default class Ajustes extends Phaser.Scene{
         document.getElementById('tituloV1').style.display = 'block';
         document.getElementById('entradaV1').style.display = 'block';
 
-        let entradaM1 = document.getElementById('tituloM1');
+        let entradaM1 = document.getElementById('entradaM1');
         let entradaV1 = document.getElementById('entradaV1');
 
         // Cropo 2
@@ -100,13 +103,15 @@ export default class Ajustes extends Phaser.Scene{
             });
         }
 
-        entradaM1.addEventListener('change', function(){
-            let massa = this.value;
-            cena.corpo1.setdata.massa = massa;
-            cena.contador++;
+        entradaM1.addEventListener('change', () =>{
+            console.log('leu a massa de 1');
+            let massa = entradaM1.value;
+            this.corpo1.setdata.massa = massa;
+            this.contador++;
         });
 
         entradaV1.addEventListener('change', function(){ // 10,20
+            console.log('leu a velocidade de 1');
             let velocidade = this.value;
             let partes = velocidade.split(',');
             cena.corpo1.setdata.velocidade = partes.map(Number);
@@ -114,12 +119,14 @@ export default class Ajustes extends Phaser.Scene{
         });
 
         entradaM2.addEventListener('change', function(){
+            console.log('leu a massa de 2');
             let massa = this.value;
             cena.corpo2.setdata.massa = massa;
             cena.contador++;
         });
 
         entradaV2.addEventListener('change', function(){
+            console.log('leu a velocidade de 2');
             let velocidade = this.value;
             let partes = velocidade.split(',');
             cena.corpo2.setdata.velocidade = partes.map(Number);

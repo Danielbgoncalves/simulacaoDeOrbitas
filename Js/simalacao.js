@@ -17,10 +17,14 @@ export default class Simulacao extends Phaser.Scene{
 
     create(){
 
-        this.corpo1 = new Corpo(this, this.corpoVindo1.setdata.massa, this.corpoVindo1.setdata.posicao, this.corpoVindo1.setdata.velocidade, 'verde');
-this.corpo2 = new Corpo(this, this.corpoVindo2.setdata.massa, this.corpoVindo2.setdata.posicao, this.corpoVindo2.setdata.velocidade, 'vermelho');
-if(this.quantosPlanetas === 3)
-    this.corpo3 = new Corpo(this, this.corpoVindo3.setdata.massa, this.corpoVindo3.setdata.posicao, this.corpoVindo3.setdata.velocidade, 'verde');
+        
+        console.log('1- massa: ', this.corpoVindo1.setdata.massa, 'posicao :', this.corpoVindo1.setdata.posicao, 'velocidade :', this.corpoVindo1.setdata.velocidade, );
+        console.log('2- massa: ', this.corpoVindo2.setdata.massa, 'posicao :', this.corpoVindo2.setdata.posicao, 'velocidade :', this.corpoVindo2.setdata.velocidade, );
+
+        this.corpo1 = new Corpo(this, this.corpoVindo1.setdata.massa, this.corpoVindo1.setdata.posicao, this.corpoVindo1.setdata.velocidade, 'vermelho', this.calculaEscala(this.corpoVindo1.setdata.massa));
+        this.corpo2 = new Corpo(this, this.corpoVindo2.setdata.massa, this.corpoVindo2.setdata.posicao, this.corpoVindo2.setdata.velocidade, 'verde', this.calculaEscala(this.corpoVindo2.setdata.massa));
+        if(this.quantosPlanetas === 3)
+            this.corpo3 = new Corpo(this, this.corpoVindo3.setdata.massa, this.corpoVindo3.setdata.posicao, this.corpoVindo3.setdata.velocidade, 'azul', this.calculaEscala(this.corpoVindo3.setdata.massa));
 
         if(this.quantosPlanetas === 3)
             this.corpos = [this.corpo1, this.corpo2, this.corpo3];
@@ -47,7 +51,7 @@ if(this.quantosPlanetas === 3)
     atualizaCorpo(corpo1, corpo2){
         let fx = this.fx;
         let fy = this.fy;
-        let dt = 1/60;
+        let dt = 1/10;
 
         corpo1.velocidade[0] += fx * dt / corpo1.massa;
         corpo1.velocidade[1] += fy * dt / corpo1.massa;
@@ -61,6 +65,19 @@ if(this.quantosPlanetas === 3)
 
         corpo1.atualizar();
         corpo2.atualizar();
+    }
+
+    calculaEscala(massa){
+        let escalaApropriada;
+        if(massa > 100) massa = 100;
+        if(massa < 1) massa = 1;
+
+        if(massa > 40) escalaApropriada = 1.1;
+        else if (massa > 29) escalaApropriada = 1;
+        else if(massa > 15) escalaApropriada = 0.85;
+        else escalaApropriada = 0.7;
+
+        return escalaApropriada;
     }
 
     update(){
