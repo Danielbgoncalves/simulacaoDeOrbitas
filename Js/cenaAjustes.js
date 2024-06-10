@@ -27,20 +27,18 @@ export default class Ajustes extends Phaser.Scene{
         this.input.setDraggable(this.corpo1);
         this.input.setDraggable(this.corpo2);
 
-        this.corpo1.setdata = { posicao: [], velocidade: [], massa: 0};
-        this.corpo2.setdata = { posicao: [], velocidade: [], massa: 0};
+        this.corpo1.setdata = { posicao: [500, 400], velocidade: [0,0], massa: 1};
+        this.corpo2.setdata = { posicao: [100, 800], velocidade: [0,1], massa: 1};
 
         if(this.quantidadePlanetas === 3){
             this.corpo3 = this.add.image(550, 400, 'azul');
             this.corpo3.setInteractive();
             this.input.setDraggable(this.corpo3);
-            this.corpo3.setdata = { posicao: [], velocidade: [] };
-        }
+            this.corpo3.setdata = { posicao: [200, 100], velocidade: [1,0], massa: 1};
+        }        
 
-        this.contador = 1;
-        this.iniciar = this.add.image(800, 700, 'botaoInicio');
-        this.iniciar.setVisible(false);
-
+        // recebe a lentidao do processo
+        this.lentidao = 1;
 
         this.input.on('drag', (pointer,gameObject,dragX,dragY)=>{
             gameObject.x = dragX;
@@ -81,12 +79,13 @@ export default class Ajustes extends Phaser.Scene{
         let entradaV2 = document.getElementById('entradaV2');
 
         if(this.quantidadePlanetas === 3){
+            document.getElementById('instrucoes').style.display = "none";
             document.getElementById('tituloM3').style.display = 'block';
-            document.getElementById('entradaM3').style.display = 'block';
             document.getElementById('tituloV3').style.display = 'block';
+            document.getElementById('entradaM3').style.display = 'block';
             document.getElementById('entradaV3').style.display = 'block';
 
-            let entradaM3 = document.getElementById('tituloM3');
+            let entradaM3 = document.getElementById('entradaM3');
             let entradaV3 = document.getElementById('entradaV3');
 
             entradaM3.addEventListener('change', function(){
@@ -133,14 +132,22 @@ export default class Ajustes extends Phaser.Scene{
             cena.contador++;
         });
 
+        // Entrada da Câmera lenta
+        document.getElementById('tituloCL').style.display = 'block';
+        let entradaCL = document.getElementById('entradaCL');
+        entradaCL.style.display = 'block';
+        entradaCL.addEventListener('change', function(){
+            cena.lentidao =  this.value;
+        });
+
         document.getElementById('botaoIniciar').style.display = 'block';
         let botaoIniciar = document.getElementById('botaoIniciar');
 
         botaoIniciar.addEventListener('click', () =>{
             if(this.quantidadePlanetas === 3)
-                this.scene.start('CenaSimulação', {corpo1: this.corpo1, corpo2: this.corpo2, corpo3: this.corpo3, qtd: 3 });
+                this.scene.start('CenaSimulação', {corpo1: this.corpo1, corpo2: this.corpo2, corpo3: this.corpo3, qtd: 3, lentidao: this.lentidao });
             else 
-                this.scene.start('CenaSimulação', {corpo1: this.corpo1, corpo2: this.corpo2, corpo3: null, qtd: 2 });
+                this.scene.start('CenaSimulação', {corpo1: this.corpo1, corpo2: this.corpo2, corpo3: null, qtd: 2, lentidao: this.lentidao });
         });
 
     }

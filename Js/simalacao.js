@@ -11,6 +11,7 @@ export default class Simulacao extends Phaser.Scene{
         this.corpoVindo2 = data.corpo2;
         this.corpoVindo3 = data.corpo3;
         this.quantosPlanetas = data.qtd;
+        this.lentidao = data.lentidao;
     }
 
     preload(){}
@@ -18,8 +19,8 @@ export default class Simulacao extends Phaser.Scene{
     create(){
 
         
-        console.log('1- massa: ', this.corpoVindo1.setdata.massa, 'posicao :', this.corpoVindo1.setdata.posicao, 'velocidade :', this.corpoVindo1.setdata.velocidade, );
-        console.log('2- massa: ', this.corpoVindo2.setdata.massa, 'posicao :', this.corpoVindo2.setdata.posicao, 'velocidade :', this.corpoVindo2.setdata.velocidade, );
+        //console.log('1- massa: ', this.corpoVindo1.setdata.massa, 'posicao :', this.corpoVindo1.setdata.posicao, 'velocidade :', this.corpoVindo1.setdata.velocidade, );
+        //console.log('2- massa: ', this.corpoVindo2.setdata.massa, 'posicao :', this.corpoVindo2.setdata.posicao, 'velocidade :', this.corpoVindo2.setdata.velocidade, );
 
         this.corpo1 = new Corpo(this, this.corpoVindo1.setdata.massa, this.corpoVindo1.setdata.posicao, this.corpoVindo1.setdata.velocidade, 'vermelho', this.calculaEscala(this.corpoVindo1.setdata.massa));
         this.corpo2 = new Corpo(this, this.corpoVindo2.setdata.massa, this.corpoVindo2.setdata.posicao, this.corpoVindo2.setdata.velocidade, 'verde', this.calculaEscala(this.corpoVindo2.setdata.massa));
@@ -31,8 +32,14 @@ export default class Simulacao extends Phaser.Scene{
         else 
             this.corpos = [this.corpo1, this.corpo2];
     
-        this.controlador = 1;
+        this.controlador = 0;
 
+        let botaoReiniciar = document.getElementById('botaoReiniciar');
+        botaoReiniciar.style.display = 'block';
+        botaoReiniciar.addEventListener('click', () =>{
+            location.reload();
+        });
+    
     }
 
     forcaResultanteDaInteracao(corpo1, corpo2){
@@ -51,7 +58,7 @@ export default class Simulacao extends Phaser.Scene{
     atualizaCorpo(corpo1, corpo2){
         let fx = this.fx;
         let fy = this.fy;
-        let dt = 1/10;
+        let dt = 1/60;
 
         corpo1.velocidade[0] += fx * dt / corpo1.massa;
         corpo1.velocidade[1] += fy * dt / corpo1.massa;
@@ -72,20 +79,19 @@ export default class Simulacao extends Phaser.Scene{
         if(massa > 100) massa = 100;
         if(massa < 1) massa = 1;
 
-        if(massa > 40) escalaApropriada = 1.1;
-        else if (massa > 29) escalaApropriada = 1;
-        else if(massa > 15) escalaApropriada = 0.85;
+        if(massa > 20) escalaApropriada = 1.1;
+        else if (massa > 15) escalaApropriada = 1;
+        else if(massa > 10) escalaApropriada = 0.85;
         else escalaApropriada = 0.7;
 
         return escalaApropriada;
     }
 
     update(){
-
-
-        this.controlador++;
-        if(this.controlador === 2){
+        //console.log(this.lentidao);
+        if(this.controlador == this.lentidao ){
             for(let i = 0; i < this.corpos.length; i++){
+                //console.log('o calculo esta senod feito');
                 for( let j = i + 1; j < this.corpos.length; j++){
                     this.forcaResultanteDaInteracao(this.corpos[i], this.corpos[j]);
                     this.atualizaCorpo(this.corpos[i], this.corpos[j]);
@@ -93,7 +99,8 @@ export default class Simulacao extends Phaser.Scene{
                 }
             }
             this.controlador = 0;
-        }            
+        }     
+        this.controlador++;       
 
     }
 }

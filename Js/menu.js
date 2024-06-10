@@ -6,7 +6,7 @@ export default class menu extends Phaser.Scene{
     preload(){}
 
     create(){
-        this.typeWriterText(this, 'Bem vindo(a)(e)', 150, 200, 100, 'Arial', 35, '#ffffff' );
+        this.add.text(150, 200, 'Bem vindo(a)(e)', { font: 40 + "px " + 'Arial', fill: '#ffffff' });
         this.typeWriterText(this, 'Quantos Planetas serão simulados ? ', 150, 250, 100, 'Arial', 28, '#ffffff' );
 
         this.add.text(150, 400, '2                  ou                   3', { font: 40 + "px " + 'Arial', fill: '#ffffff' });

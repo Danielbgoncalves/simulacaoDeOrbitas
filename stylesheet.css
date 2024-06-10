@@ -1,15 +1,22 @@
 body{
-    background-color: #496f80;
+   background-color: rgb(255, 255, 255);
+}
+/*
+#container{
+    display: flex;
 }
 
+#DadosDa1e2{
+    order: 1;
+}
+
+#TelaJogo{
+    order: 2;
+}
+*/
 #canvas{
-    width:800px;
-    height: 700px;
-    /*position:relative;
-    margin-top: 6vh;
-    margin-bottom: auto;
-    margin-left: auto;
-    margin-right: auto;*/
+    width:900px;
+    height: 800px;
 }
 
 #canvas {
@@ -25,3 +32,7 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+/*
+#DadosDa3{
+    order: 3;
+}*/
