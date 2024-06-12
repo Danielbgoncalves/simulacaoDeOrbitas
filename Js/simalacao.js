@@ -19,9 +19,6 @@ export default class Simulacao extends Phaser.Scene{
     create(){
 
         
-        //console.log('1- massa: ', this.corpoVindo1.setdata.massa, 'posicao :', this.corpoVindo1.setdata.posicao, 'velocidade :', this.corpoVindo1.setdata.velocidade, );
-        //console.log('2- massa: ', this.corpoVindo2.setdata.massa, 'posicao :', this.corpoVindo2.setdata.posicao, 'velocidade :', this.corpoVindo2.setdata.velocidade, );
-
         this.corpo1 = new Corpo(this, this.corpoVindo1.setdata.massa, this.corpoVindo1.setdata.posicao, this.corpoVindo1.setdata.velocidade, 'vermelho', this.calculaEscala(this.corpoVindo1.setdata.massa));
         this.corpo2 = new Corpo(this, this.corpoVindo2.setdata.massa, this.corpoVindo2.setdata.posicao, this.corpoVindo2.setdata.velocidade, 'verde', this.calculaEscala(this.corpoVindo2.setdata.massa));
         if(this.quantosPlanetas === 3)
@@ -34,12 +31,31 @@ export default class Simulacao extends Phaser.Scene{
     
         this.controlador = 0;
 
-        let botaoReiniciar = document.getElementById('botaoReiniciar');
-        botaoReiniciar.style.display = 'block';
-        botaoReiniciar.addEventListener('click', () =>{
+        this.setBotoes();
+        this.mostraBotaoReiniciar();
+
+    }
+
+    setBotoes(){
+        document.getElementById('botaoIniciar').style.display = 'none';
+
+        // Botão Menu
+        document.getElementById('botaoMenu').style.display = 'block';
+        let botaoMenu = document.getElementById('botaoMenu');
+
+        botaoMenu.addEventListener('click', () =>{
             location.reload();
         });
-    
+    }
+
+    mostraBotaoReiniciar(){
+        let botaoReiniciar = document.getElementById('botaoReiniciar');
+        botaoReiniciar.style.display = 'block';
+        let cena = this;
+        botaoReiniciar.addEventListener('click', () =>{
+            console.log('reiniciou');
+            this.scene.start('CenaAjustes', {quantosPlanetas: this.quantosPlanetas});
+        });
     }
 
     forcaResultanteDaInteracao(corpo1, corpo2){
@@ -88,10 +104,8 @@ export default class Simulacao extends Phaser.Scene{
     }
 
     update(){
-        //console.log(this.lentidao);
         if(this.controlador == this.lentidao ){
             for(let i = 0; i < this.corpos.length; i++){
-                //console.log('o calculo esta senod feito');
                 for( let j = i + 1; j < this.corpos.length; j++){
                     this.forcaResultanteDaInteracao(this.corpos[i], this.corpos[j]);
                     this.atualizaCorpo(this.corpos[i], this.corpos[j]);

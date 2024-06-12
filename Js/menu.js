@@ -18,6 +18,7 @@ export default class menu extends Phaser.Scene{
             console.log(mouseX, mouseY);
             this.verificaOndeClicou(mouseX, mouseY);
         });
+
     }
 
     typeWriterText(jogo, text, x, y, speed, font, size, color) {

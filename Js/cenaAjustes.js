@@ -3,6 +3,15 @@ import {Corpo} from './corpos.js'
 export default class Ajustes extends Phaser.Scene{
     constructor(){
         super({key: 'CenaAjustes'});
+
+        this.formValues = {
+            entradaM1: '',
+            entradaV1: '',
+            entradaM2: '',
+            entradaV2: '',
+            entradaM3: '',
+            entradaV3: '',
+        }
         
     }
 
@@ -48,18 +57,23 @@ export default class Ajustes extends Phaser.Scene{
         this.input.on('dragend', (pointer, gameObject)=> {
             //if(gameObject === this.medidorMassa1)console.log('oi')
             gameObject.setdata.posicao = [gameObject.x , gameObject.y];
-            console.log("1 massa: ",this.corpo1.setdata.massa);
+            /*console.log("1 massa: ",this.corpo1.setdata.massa);
             console.log("1 posicao: ",this.corpo1.setdata.posicao);
-            console.log("1 velocidade: ",this.corpo1.setdata.velocidade);
+            console.log("1 velocidade: ",this.corpo1.setdata.velocidade);*/
 
-            this.defineAtributos(gameObject);
+            
         });        
+
+        this.defineAtributos();
+        this.preencheHTML();
         
-        document.getElementById('botaoReiniciar').style.display = 'none';
     }
 
     defineAtributos(){
         let cena = this;
+
+        //esconde o botao de reiniciar
+        document.getElementById('botaoReiniciar').style.display = 'none';
 
         document.getElementById('tituloM1').style.display = 'block';
         document.getElementById('entradaM1').style.display = 'block';
@@ -140,16 +154,47 @@ export default class Ajustes extends Phaser.Scene{
             cena.lentidao =  this.value;
         });
 
+        // Botão Iniciar
         document.getElementById('botaoIniciar').style.display = 'block';
         let botaoIniciar = document.getElementById('botaoIniciar');
 
         botaoIniciar.addEventListener('click', () =>{
+            this.preencheForm();
             if(this.quantidadePlanetas === 3)
                 this.scene.start('CenaSimulação', {corpo1: this.corpo1, corpo2: this.corpo2, corpo3: this.corpo3, qtd: 3, lentidao: this.lentidao });
             else 
                 this.scene.start('CenaSimulação', {corpo1: this.corpo1, corpo2: this.corpo2, corpo3: null, qtd: 2, lentidao: this.lentidao });
         });
 
+        // Botão Menu
+        document.getElementById('botaoMenu').style.display = 'block';
+        let botaoMenu = document.getElementById('botaoMenu');
+
+        botaoMenu.addEventListener('click', () =>{
+            location.reload();
+        });
+
+    }
+
+    preencheForm(){
+        this.formValues.entradaM1 = document.getElementById('tituloM1').value;
+        this.formValues.entradaV1 = document.getElementById('entradaV1').value;
+        this.formValues.entradaM2 = document.getElementById('entradaM2').value;
+        this.formValues.entradaV2 = document.getElementById('entradaV2').value;
+        this.formValues.entradaM3 = document.getElementById('entradaM3').value;
+        this.formValues.entradaV3 = document.getElementById('entradaV3').value;
+        this.formValues.entradaCL = document.getElementById('entradaCL').value;
+    }
+
+    preencheHTML(){
+        if(!this.formValues.entradaM1) return;
+
+        document.getElementById('tituloM1').value = this.formValues.entradaM1;
+        document.getElementById('tituloV1').value = this.formValues.entradaV1;
+        document.getElementById('tituloM2').value = this.formValues.entradaM2;
+        document.getElementById('tituloV2').value = this.formValues.entradaV2;
+        document.getElementById('tituloM3').value = this.formValues.entradaM3;
+        document.getElementById('tituloV3').value = this.formValues.entradaV3;
     }
 
     shutdown() {
