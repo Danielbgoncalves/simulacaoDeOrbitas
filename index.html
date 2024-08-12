@@ -5,48 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/Imagens/favicon.ico">
     <link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
-    <title> SIMULAÇÃO </title>
+    <title>SIMULAÇÃO</title>
 </head>
 <body>
-    <div id="instrucoes" style="display: block">
-        <h3 id="titulo" style="display: none;">Siga o modelo:</h3>
-        <p>Massa: 1(leve), 30(pesado)</p>
-        <p>Velocidade:</p>
-        <p>  1,0(leve pra direita e nada pra baixo)</p>
-        <p>  -10,-1(forte pra esquerda e leve pra cima)</p>
-        <p>Câmera Lenta: 1(rápido), 50(lento)</p>
+    <div id="container">
+        <div id="formulario">
+            <div id="instrucoes">
+                <h3>Siga o modelo:</h3>
+                <p>Massa: 1(leve), 30(pesado)</p>
+                <p>Velocidade:</p>
+                <p>1,0(leve pra direita e nada pra baixo)</p>
+                <p>-10,-1(forte pra esquerda e leve pra cima)</p>
+                <p>Câmera Lenta: 1(rápido), 50(lento)</p>
+            </div>
 
-    </div>
-        
-        <h2 id="tituloM1" style="display: none;">Massa do Vermelho</h2>
-        <input type="text" id="entradaM1" style="display: none;">
-        <h2 id="tituloV1" style="display: none;">Velocidade do Vermelho</h2>
-        <input type="text" id="entradaV1" style="display: none;">
+            <div id="inputs">
+                <h2 id="tituloM1">Massa do Vermelho</h2>
+                <input type="text" id="entradaM1">
+                <h2 id="tituloV1">Velocidade do Vermelho</h2>
+                <input type="text" id="entradaV1">
 
-        <h2 id="tituloM2" style="display: none;">Massa do Verde</h2>
-        <input type="text" id="entradaM2" style="display: none;">
-        <h2 id="tituloV2" style="display: none;">Velocidade do Verde</h2>
-        <input type="text" id="entradaV2" style="display: none;">
+                <h2 id="tituloM2">Massa do Verde</h2>
+                <input type="text" id="entradaM2">
+                <h2 id="tituloV2">Velocidade do Verde</h2>
+                <input type="text" id="entradaV2">
 
-        <h2 id="tituloM3" style="display: none;">Massa do Azul</h2>
-        <input type="text" id="entradaM3" style="display: none;">
-        <h2 id="tituloV3" style="display: none;">Velocidade do Azul</h2>
-        <input type="text" id="entradaV3" style="display: none;">
-    
-        <h2 id="tituloCL" style="display: none;">Câmera lenta</h2>
-        <input type="text" id="entradaCL" style="display: none;">
-    
-        <h1></h1>
-        <button type="button" id="botaoIniciar" style="display: none;">Iniciar!</button>
-    
-        <h1></h1>
-        <button type="button" id="botaoReiniciar" style="display: none;">Reniciar</button>
+                <h2 id="tituloM3">Massa do Azul</h2>
+                <input type="text" id="entradaM3">
+                <h2 id="tituloV3">Velocidade do Azul</h2>
+                <input type="text" id="entradaV3">
 
-        <h1></h1>
-        <button type="button" id="botaoMenu" style="display: none;">Menu</button>
+                <h2 id="tituloCL">Câmera lenta</h2>
+                <input type="text" id="entradaCL">
+            </div>
+
+            <div class="botoes">
+                <button type="button" id="botaoIniciar">Iniciar!</button>
+                <button type="button" id="botaoReiniciar">Reiniciar</button>
+                <button type="button" id="botaoMenu">Menu</button>
+            </div>
+        </div>
 
         <main id="canvas"></main>
-
+    </div>
 
     <script src="Js/phaser.min.js"></script>
     <script type="module" src="Js/principal.js"></script>

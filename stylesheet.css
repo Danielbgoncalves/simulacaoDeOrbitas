@@ -1,38 +1,132 @@
-body{
-   background-color: rgb(255, 255, 255);
-}
-/*
-#container{
+/* Estilos Gerais */
+body {
+    font-family: 'Arial, sans-serif';
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-#DadosDa1e2{
-    order: 1;
-}
-
-#TelaJogo{
-    order: 2;
-}
-*/
-#canvas{
-    width:900px;
-    height: 800px;
-}
-
-#canvas {
+/* Container Principal */
+#container {
     display: flex;
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center; /* Centraliza verticalmente */
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh; /* Ocupa toda a altura da viewport */
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
+/* Estilos do Formulário */
+#formulario {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto; /* Permite rolagem no formulário */
+    height: 100%; /* Faz o formulário ocupar toda a altura do contêiner */
+}
 
+#instrucoes, #inputs, .botoes {
+    margin-bottom: 20px;
+}
+
+#instrucoes {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#inputs {
+    flex-grow: 1;
+}
+
+h2, h3 {
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="text"]:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Estilos dos Botões */
+button {
+    padding: 10px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Estilos do Canvas */
 #canvas {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    flex: 2;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 500px;
 }
-/*
-#DadosDa3{
-    order: 3;
-}*/
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+    #container {
+        flex-direction: column;
+    }
+
+    #formulario, #canvas {
+        width: 100%;
+    }
+
+    .botoes {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .botoes button {
+        width: 32%;
+    }
+}
