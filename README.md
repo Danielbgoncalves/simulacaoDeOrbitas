@@ -5,7 +5,9 @@ O programa calcula as forças entre cada corpo (planeta) a cada frame de modo qu
 
 ## Screenshots
 
-![App Screenshot](Imagens/exemplo01.png)
 ![App gif](Imagens/exmplo02.gif)
+
+![App Screenshot](Imagens/exemplo01.png)
+
 
 
