@@ -1,7 +1,7 @@
 
-# Simulador de gravitção 
+# Simulador de gravitação 
 
-O programa calcula as forças entre cada corpo (planeta) a cada frame de modo que a movimentação simulada segue as leis de Newton !!! 
+O programa calcula as forças entre cada corpo (planeta) levando em conta as massas e velocidades a cada frame  de modo que a movimentação simulada segua as leis de Newton !!! 
 
 ## Screenshots
 
